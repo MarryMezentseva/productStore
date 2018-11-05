@@ -1,6 +1,7 @@
 package com.petProject.productsStore.productDAO;
 
 import com.petProject.productsStore.entity.Product;
+import com.petProject.productsStore.service.ProductServiceImpl;
 import com.petProject.productsStore.utils.DBTemplate;
 import org.testng.annotations.*;
 import java.util.Arrays;
@@ -72,6 +73,7 @@ public class ProductDAOImplTest {
     public void testNoSuchId() {
         Product product = productDAO.get(8);
         assertNull(product);
+        ProductServiceImpl productService = new ProductServiceImpl();
     }
 
     @AfterClass
