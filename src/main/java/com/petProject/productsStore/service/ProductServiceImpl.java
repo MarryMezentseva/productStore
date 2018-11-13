@@ -1,6 +1,7 @@
 package com.petProject.productsStore.service;
 
 import com.petProject.productsStore.entity.Product;
+import com.petProject.productsStore.exceptions.ProductServiceException;
 import com.petProject.productsStore.productDAO.ProductDAO;
 import com.petProject.productsStore.productDAO.ProductDAOImpl;
 import com.petProject.productsStore.utils.DBTemplate;
@@ -47,6 +48,9 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public List<Product> getByPriceRange(double startFrom, double endWith) {
+        if (startFrom < 0 || endWith < 0){
+            throw new ProductServiceException("Uf uffff uffff.");
+        }
         return productDAO.findAll().stream()
                 .filter(product -> startFrom <= product.getPrice() && endWith >= product.getPrice())
                 .collect(Collectors.toList());
