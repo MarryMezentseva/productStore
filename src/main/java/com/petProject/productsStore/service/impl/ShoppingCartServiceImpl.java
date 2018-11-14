@@ -65,7 +65,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public void removeAllProducts(User user, int productId) {
+    public void removeAllProducts(User user) {
         if (user == null) {
             throw new RuntimeException("Cart is null.");
         }

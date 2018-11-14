@@ -13,10 +13,11 @@ import java.util.Optional;
 public class ShoppingCartDAOImpl implements ShoppingCartDAO {
 
     protected DBTemplate dbTemplate;
-    protected List<ShoppingCart> shoppingCarts = dbTemplate.getShoppingCarts();
+    protected List<ShoppingCart> shoppingCarts;
 
     public ShoppingCartDAOImpl(DBTemplate dbTemplate) {
         this.dbTemplate = dbTemplate;
+        this.shoppingCarts = dbTemplate.getShoppingCarts();
     }
 
     @Override
