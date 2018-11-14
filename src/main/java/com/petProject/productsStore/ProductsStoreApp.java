@@ -1,11 +1,8 @@
 package com.petProject.productsStore;
 
 import com.petProject.productsStore.entity.Product;
-import com.petProject.productsStore.productDAO.ProductDAO;
-import com.petProject.productsStore.productDAO.ProductDAOImpl;
 import com.petProject.productsStore.service.ProductService;
-import com.petProject.productsStore.service.ProductServiceImpl;
-import com.petProject.productsStore.utils.DBTemplate;
+import com.petProject.productsStore.service.impl.ProductServiceImpl;
 
 import java.util.List;
 

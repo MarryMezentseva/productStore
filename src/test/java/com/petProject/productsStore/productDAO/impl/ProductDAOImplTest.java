@@ -1,7 +1,9 @@
-package com.petProject.productsStore.productDAO;
+package com.petProject.productsStore.productDAO.impl;
 
 import com.petProject.productsStore.entity.Product;
-import com.petProject.productsStore.service.ProductServiceImpl;
+import com.petProject.productsStore.productDAO.ProductDAO;
+import com.petProject.productsStore.productDAO.impl.ProductDAOImpl;
+import com.petProject.productsStore.service.impl.ProductServiceImpl;
 import com.petProject.productsStore.utils.DBTemplate;
 import org.testng.annotations.*;
 import java.util.Arrays;

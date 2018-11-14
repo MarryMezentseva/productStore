@@ -1,6 +1,7 @@
-package com.petProject.productsStore.productDAO;
+package com.petProject.productsStore.productDAO.impl;
 
 import com.petProject.productsStore.entity.Product;
+import com.petProject.productsStore.productDAO.ProductDAO;
 import com.petProject.productsStore.utils.DBTemplate;
 
 import java.util.Comparator;
@@ -24,7 +25,7 @@ public class ProductDAOImpl implements ProductDAO {
             throw new RuntimeException("Cant add null.");
         }
         int id = productList.stream()
-                .map(Product::getId)
+                .map(product1 -> product1.getId())
                 .max(Comparator.naturalOrder()).get();
         product.setId(id + 1);
         productList.add(product);
@@ -45,23 +46,17 @@ public class ProductDAOImpl implements ProductDAO {
 
     @Override
     public void delete(int id) {
-        Product p = productList.get(id);
-        if (p == null){
+        boolean res = productList.removeIf(product -> product.getId() == id);
+        if (res){
             throw new RuntimeException("Can't find product with id=" + id);
-        }else {
-            productList.remove(id);
         }
     }
 
     @Override
     public Product get(int id) {
-        Optional<Product> productOptional = productList.stream()
+        return productList.stream()
                 .filter(product -> product.getId() == id)
-                .findFirst();
-        if (!productOptional.isPresent()){
-            return null;
-        }
-        return productList.get(id);
+                .findFirst().get();
     }
 
     @Override
