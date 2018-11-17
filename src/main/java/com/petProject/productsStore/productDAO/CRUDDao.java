@@ -1,5 +1,7 @@
 package com.petProject.productsStore.productDAO;
 
+import com.petProject.productsStore.entity.User;
+
 import java.util.List;
 
 public interface CRUDDao <T> {

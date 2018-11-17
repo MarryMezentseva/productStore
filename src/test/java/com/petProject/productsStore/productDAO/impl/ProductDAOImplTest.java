@@ -37,7 +37,8 @@ public class ProductDAOImplTest {
     }
 
     @Test(expectedExceptions = RuntimeException.class)
-    public void testUpdateNegative() {
+    public void testUpdateNegative()
+    {
         productDAO.update(null);
     }
 

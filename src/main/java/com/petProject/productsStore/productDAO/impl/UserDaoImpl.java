@@ -34,18 +34,18 @@ public class UserDaoImpl implements UserDao {
         if (user == null){
             throw new RuntimeException("Cant add null.");
         }
-        User u = users.get(user.getId());
-        if (u == null){
+        boolean res = users.removeIf(user1 -> user1.getId() == user.getId());
+        if (!res){
             throw new RuntimeException("Can't find product with id=" + user.getId());
         }else {
-            users.add(user.getId(), user);
+            users.add(user);
         }
     }
 
     @Override
     public void delete(int id) {
         boolean res = users.removeIf(user -> user.getId() == id);
-        if (res){
+        if (!res){
             throw new RuntimeException("Can't find user with id=" + id);
         }
     }
@@ -61,4 +61,5 @@ public class UserDaoImpl implements UserDao {
     public List<User> findAll() {
         return users;
     }
-}
+
+ }
