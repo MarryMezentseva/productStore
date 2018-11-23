@@ -1,4 +1,4 @@
-package com.petProject.productsStore.productDAO.impl;
+package com.petProject.productsStore.service.impl;
 
 import com.petProject.productsStore.entity.Product;
 import com.petProject.productsStore.entity.ShoppingCart;
@@ -6,81 +6,38 @@ import com.petProject.productsStore.entity.User;
 import com.petProject.productsStore.productDAO.ProductDAO;
 import com.petProject.productsStore.productDAO.ShoppingCartDAO;
 import com.petProject.productsStore.productDAO.UserDao;
+import com.petProject.productsStore.productDAO.impl.ProductDAOImpl;
+import com.petProject.productsStore.productDAO.impl.ShoppingCartDAOImpl;
+import com.petProject.productsStore.productDAO.impl.UserDaoImpl;
+import com.petProject.productsStore.service.ProductService;
+import com.petProject.productsStore.service.ShoppingCartService;
+import com.petProject.productsStore.service.UserService;
 import com.petProject.productsStore.utils.DBTemplate;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.testng.Assert.*;
 
-public class ShoppingCartDAOImplTest {
+public class ShoppingCartServiceImplTest {
 
-    ShoppingCartDAO shoppingCartDAO;
-    UserDao userDAO;
-    ProductDAO productDAO;
+ShoppingCartService shoppingCartService;
+UserService userService;
+ProductService productService;
 
     @Test
-    public void testCreate() {
-        User user = userDAO.get(5);
-        List<Product> productList = Arrays.asList(productDAO.get(2), productDAO.get(1), productDAO.get(3));
+    public void testAddProduct() {
 
-        ShoppingCart shoppingCart = new ShoppingCart(user, productList);
-        shoppingCartDAO.create(shoppingCart);
-        int shoppingCartListSizeAfter = shoppingCartDAO.findAll().size();
-        assertEquals(shoppingCartListSizeAfter, 4);
     }
 
     @Test
-    public void testUpdate() {
-        ShoppingCart shoppingCart = shoppingCartDAO.getByUserId(2);
-        Product product = productDAO.get(3);
-        shoppingCart.getProducts().add(product);
-
-        shoppingCartDAO.update(shoppingCart);
-        ShoppingCart result = shoppingCartDAO.getByUserId(2);
-
-        assertEquals(result.getProducts().size(), 2);
-    }
-
-    @Test(expectedExceptions = RuntimeException.class)
-    public void testUpdateNegative() {
-        shoppingCartDAO.update(null);
+    public void testRemoveProduct() {
     }
 
     @Test
-    public void testGet() {
-        ShoppingCart shoppingCart = shoppingCartDAO.getByUserId(1);
-        assertNotNull(shoppingCart);
-    }
-
-    @Test(expectedExceptions = RuntimeException.class)
-    public void negativeTestGetWithNonExistingId() {
-        ShoppingCart shoppingCart = shoppingCartDAO.getByUserId(9);
-        assertNotNull(shoppingCart);
-    }
-
-    @Test
-    public void testDelete() {
-        shoppingCartDAO.delete(4);
-        int shCartSizeAfterDelete = shoppingCartDAO.findAll().size();
-        assertEquals(shCartSizeAfterDelete, 2);
-    }
-
-    @Test(expectedExceptions = RuntimeException.class)
-    public void negativeTestDeleteWithNonExistingId() {
-        shoppingCartDAO.delete(3);
-        int shCartSizeAfterDelete = shoppingCartDAO.findAll().size();
-        assertEquals(shCartSizeAfterDelete, 2);
-    }
-
-    @Test
-    public void testFindAll() {
-        List<ShoppingCart> shoppingCarts = shoppingCartDAO.findAll();
-        assertEquals(shoppingCarts.size(), 3);
+    public void testRemoveAllProducts() {
     }
 
     @BeforeMethod
@@ -88,27 +45,32 @@ public class ShoppingCartDAOImplTest {
         DBTemplate dbTemplate = DBTemplate.getInstance();
         mockProductsDB();
         mockUserDB();
-        userDAO = new UserDaoImpl(dbTemplate);
-        productDAO = new ProductDAOImpl(dbTemplate);
-        mockShoppingCartDB();
-        shoppingCartDAO = new ShoppingCartDAOImpl(dbTemplate);
-    }
 
+        UserDao userDao = new UserDaoImpl(dbTemplate);
+        userService = new UserServiceImpl(userDao);
+
+        ProductDAO productDAO = new ProductDAOImpl(dbTemplate);
+        productService = new ProductServiceImpl(productDAO);
+
+        mockShoppingCartDB();
+        ShoppingCartDAO shoppingCartDAO = new ShoppingCartDAOImpl(dbTemplate);
+        shoppingCartService = new ShoppingCartServiceImpl(shoppingCartDAO);
+    }
     private void mockShoppingCartDB() {
         DBTemplate dbTemplate = DBTemplate.getInstance();
         dbTemplate.getShoppingCarts().clear();
-        List<Product> products = productDAO.findAll();
+        List<Product> products = productService.findAll();
 
         ShoppingCart shoppingCart1 = new ShoppingCart();
-        shoppingCart1.setUser(userDAO.get(1));
-        shoppingCart1.getProducts().add(products.get(3));
+        shoppingCart1.setUser(userService.get(1));
+        shoppingCart1.getProducts().addAll(Arrays.asList(products.get(1), products.get(3), products.get(5)));
 
         ShoppingCart shoppingCart2 = new ShoppingCart();
-        shoppingCart2.setUser(userDAO.get(4));
+        shoppingCart2.setUser(userService.get(4));
         shoppingCart2.getProducts().add(products.get(4));
 
         ShoppingCart shoppingCart3 = new ShoppingCart();
-        shoppingCart3.setUser(userDAO.get(2));
+        shoppingCart3.setUser(userService.get(2));
         shoppingCart3.getProducts().add(products.get(2));
 
 

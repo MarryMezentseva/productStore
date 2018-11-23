@@ -26,10 +26,13 @@ public class ShoppingCartDAOImpl implements ShoppingCartDAO {
         }
 
         User user = shoppingCart.getUser();
+
         boolean isShCartPresent = shoppingCarts.stream()
                 .anyMatch(shoppingCart1 -> user.getId() == shoppingCart1.getUser().getId());
         if (!isShCartPresent){
             shoppingCarts.add(shoppingCart);
+        }else {
+            throw new RuntimeException("Shopping cart already exists. Cant create ShoppingCart with user id="+user.getId());
         }
     }
 
