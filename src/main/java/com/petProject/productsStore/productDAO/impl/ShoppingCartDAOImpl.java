@@ -9,7 +9,6 @@ import com.petProject.productsStore.utils.DBTemplate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-
 public class ShoppingCartDAOImpl implements ShoppingCartDAO {
 
     protected DBTemplate dbTemplate;
@@ -41,14 +40,13 @@ public class ShoppingCartDAOImpl implements ShoppingCartDAO {
         }
         boolean res = shoppingCarts.removeIf(s-> s.getUser().getId() == shoppingCart.getUser().getId());
         if (!res){
-            shoppingCarts.add(shoppingCart);
-        }else {
             throw new RuntimeException("Can't find cart with user id=" + shoppingCart.getUser().getId());
         }
+        shoppingCarts.add(shoppingCart);
     }
 
     @Override
-    public ShoppingCart get(int userId) {
+    public ShoppingCart getByUserId(int userId) {
         return shoppingCarts.stream()
                 .filter(shoppingCart -> shoppingCart.getUser().getId() == userId)
                 .findFirst().get();
@@ -58,7 +56,7 @@ public class ShoppingCartDAOImpl implements ShoppingCartDAO {
     @Override
     public void delete(int userId) {
         boolean res = shoppingCarts.removeIf(shoppingCart -> shoppingCart.getUser().getId() == userId);
-        if (res){
+        if (!res){
             throw new RuntimeException("Can't find cart with user id=" + userId);
         }
     }

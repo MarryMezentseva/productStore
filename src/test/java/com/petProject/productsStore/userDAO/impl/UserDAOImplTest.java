@@ -32,8 +32,11 @@ public class UserDAOImplTest {
 
     @Test
     public void testUpdate() {
-        User user = new User(2, "John", "Lennon", "TYr89");
+        User user = userDao.get(2);//from db
+        user.setName("Fisha");
+
         userDao.update(user);
+
         User result = userDao.get(2);
         assertEquals(result.getId(), user.getId());
         assertEquals(result.getName(), user.getName());

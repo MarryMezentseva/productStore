@@ -47,7 +47,7 @@ public class ProductDAOImpl implements ProductDAO {
     @Override
     public void delete(int id) {
         boolean res = productList.removeIf(product -> product.getId() == id);
-        if (res){
+        if (!res){
             throw new RuntimeException("Can't find product with id=" + id);
         }
     }

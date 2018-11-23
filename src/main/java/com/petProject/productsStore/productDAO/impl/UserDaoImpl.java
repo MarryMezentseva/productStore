@@ -36,10 +36,10 @@ public class UserDaoImpl implements UserDao {
         }
         boolean res = users.removeIf(user1 -> user1.getId() == user.getId());
         if (!res){
-            throw new RuntimeException("Can't find product with id=" + user.getId());
-        }else {
-            users.add(user);
+            throw new RuntimeException("Can't find user with id=" + user.getId());
         }
+        users.add(user);
+
     }
 
     @Override

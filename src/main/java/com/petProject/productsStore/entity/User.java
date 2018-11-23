@@ -9,6 +9,8 @@ public class User {
     public User() {
     }
 
+
+
     public User(int id, String name, String lastName, String password) {
         this.id = id;
         this.name = name;
@@ -48,4 +50,13 @@ public class User {
         this.password = password;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }
