@@ -46,16 +46,41 @@ public class ShoppingCartDAOImplTest {
         assertEquals(result.getProducts().size(), 2);
     }
 
-    @Test
-    public void testGet() {
+    @Test(expectedExceptions = RuntimeException.class)
+    public void testUpdateNegative(){
+        shoppingCartDAO.update(null);
     }
 
     @Test
+    public void testGet() {
+        ShoppingCart shoppingCart = shoppingCartDAO.getByUserId(1);
+        assertNotNull(shoppingCart);
+    }
+
+     @Test
+     public void negativeTestGetWithNonExistingId(){
+        ShoppingCart shoppingCart = shoppingCartDAO.getByUserId(9);
+        assertNotNull(shoppingCart);
+     }
+
+    @Test
     public void testDelete() {
+        shoppingCartDAO.delete(4);
+        int shCartSizeAfterDelete = shoppingCartDAO.findAll().size();
+        assertEquals(shCartSizeAfterDelete,2);
+    }
+
+    @Test
+    public void negativeTestDeleteWithNonExistingId() {
+        shoppingCartDAO.delete(3);
+        int shCartSizeAfterDelete = shoppingCartDAO.findAll().size();
+        assertEquals(shCartSizeAfterDelete,2);
     }
 
     @Test
     public void testFindAll() {
+        List<ShoppingCart> shoppingCarts = shoppingCartDAO.findAll();
+        assertEquals(shoppingCarts.size(), 3);
     }
 
     @BeforeMethod
