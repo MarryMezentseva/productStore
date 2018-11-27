@@ -54,7 +54,7 @@ public class UserDaoImpl implements UserDao {
     public User get(int id) {
         return users.stream()
                 .filter(user -> user.getId() == id)
-                .findFirst().get();
+                .findFirst().orElseThrow(()-> new RuntimeException("User not found."));
     }
 
     @Override
