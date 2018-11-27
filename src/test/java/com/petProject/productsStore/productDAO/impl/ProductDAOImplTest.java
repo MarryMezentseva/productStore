@@ -72,7 +72,7 @@ public class ProductDAOImplTest {
         //1. call findAll()
         //2. check size > 0 (or == 5)
     }
-    @Test
+    @Test(expectedExceptions = RuntimeException.class)
     public void testNoSuchId() {
         Product product = productDAO.get(8);
         assertNull(product);

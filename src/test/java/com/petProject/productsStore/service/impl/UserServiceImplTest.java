@@ -52,7 +52,7 @@ UserService userService;
         assertNotNull(user);
     }
 
-    @Test
+    @Test(expectedExceptions = RuntimeException.class)
     public void testNegativeGetByNonExistingId() {
         User user = userService.get(8);
         assertNotNull(user);
