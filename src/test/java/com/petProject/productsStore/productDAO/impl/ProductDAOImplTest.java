@@ -44,7 +44,7 @@ public class ProductDAOImplTest {
 
     @Test
     public void testUpdate() {
-        Product product = new Product(2, "Banana", "They are yellow", 14.0);
+        Product product = productDAO.get(2);
         productDAO.update(product);
         Product result = productDAO.get(2);
         assertEquals(result.getDescription(), product.getDescription() );

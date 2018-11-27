@@ -44,7 +44,7 @@ public class UserDAOImplTest {
         assertEquals(result.getPassword(), user.getPassword());
     }
 
-    @Test
+    @Test(expectedExceptions = RuntimeException.class)
     public void testNegativeDeleteWithNotExistingId(){
         userDao.delete(6);
         int userListAfter = userDao.findAll().size();
@@ -64,7 +64,7 @@ public class UserDAOImplTest {
         assertNotNull(user);
     }
 
-    @Test
+    @Test(expectedExceptions = RuntimeException.class)
     public void testNegativeGetNotExistingId() {
         User user = userDao.get(8);
         assertNotNull(user);
@@ -73,7 +73,7 @@ public class UserDAOImplTest {
     @Test
     public void testFindAll() {
         List<User> userList = userDao.findAll();
-        assertEquals(5, userList);
+        assertEquals(userList.size(), 5);
     }
 
     @BeforeMethod

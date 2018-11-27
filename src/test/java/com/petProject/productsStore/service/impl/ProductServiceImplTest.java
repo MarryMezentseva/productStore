@@ -34,7 +34,7 @@ public class ProductServiceImplTest {
 
     @Test
     public void testUpdate() {
-        Product product = new Product(3, "Corn", "It's in cans", 10.10);
+        Product product = productService.get(3);
         productService.update(product);
         Product result = productService.get(3);
         assertEquals(result.getDescription(), product.getDescription());
