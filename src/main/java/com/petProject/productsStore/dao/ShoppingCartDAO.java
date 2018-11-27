@@ -1,6 +1,5 @@
-package com.petProject.productsStore.productDAO;
+package com.petProject.productsStore.dao;
 
-import com.petProject.productsStore.entity.Product;
 import com.petProject.productsStore.entity.ShoppingCart;
 
 import java.util.List;

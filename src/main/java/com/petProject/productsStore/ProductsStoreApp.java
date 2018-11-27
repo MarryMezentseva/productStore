@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ProductsStoreApp {
     public static void main(String[] args) {
-        //ProductDAO productDAO = new ProductDAOImpl(DBTemplate.getInstance());
+        //ProductDAO dao = new ProductDAOImpl(DBTemplate.getInstance());
         ProductService productService = new ProductServiceImpl();
         List<Product> productList = productService.findAll();
         ShoppingCartService shoppingCartService = new ShoppingCartServiceImpl();

@@ -2,10 +2,9 @@ package com.petProject.productsStore.service.impl;
 
 import com.petProject.productsStore.entity.Product;
 import com.petProject.productsStore.exceptions.ProductServiceException;
-import com.petProject.productsStore.productDAO.ProductDAO;
-import com.petProject.productsStore.productDAO.impl.ProductDAOImpl;
+import com.petProject.productsStore.dao.ProductDAO;
+import com.petProject.productsStore.dao.impl.ProductDAOImpl;
 import com.petProject.productsStore.service.ProductService;
-import com.petProject.productsStore.service.impl.ProductServiceImpl;
 import com.petProject.productsStore.utils.DBTemplate;
 import org.testng.annotations.*;
 

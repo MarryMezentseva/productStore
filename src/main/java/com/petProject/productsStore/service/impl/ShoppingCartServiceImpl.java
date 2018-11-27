@@ -3,8 +3,8 @@ package com.petProject.productsStore.service.impl;
 import com.petProject.productsStore.entity.Product;
 import com.petProject.productsStore.entity.ShoppingCart;
 import com.petProject.productsStore.entity.User;
-import com.petProject.productsStore.productDAO.ShoppingCartDAO;
-import com.petProject.productsStore.productDAO.impl.ShoppingCartDAOImpl;
+import com.petProject.productsStore.dao.ShoppingCartDAO;
+import com.petProject.productsStore.dao.impl.ShoppingCartDAOImpl;
 import com.petProject.productsStore.service.ShoppingCartService;
 import com.petProject.productsStore.utils.DBTemplate;
 

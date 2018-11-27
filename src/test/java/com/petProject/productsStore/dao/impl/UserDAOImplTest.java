@@ -1,9 +1,9 @@
-package com.petProject.productsStore.userDAO.impl;
+package com.petProject.productsStore.dao.impl;
 
 
 import com.petProject.productsStore.entity.User;
-import com.petProject.productsStore.productDAO.UserDao;
-import com.petProject.productsStore.productDAO.impl.UserDaoImpl;
+import com.petProject.productsStore.dao.UserDao;
+import com.petProject.productsStore.dao.impl.UserDaoImpl;
 import com.petProject.productsStore.utils.DBTemplate;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
