@@ -29,6 +29,11 @@ ProductService productService;
 
     @Test
     public void testAddProduct() {
+        User user = userService.get(4);
+        Product product = productService.get(3);
+
+        shoppingCartService.addProduct(user, product);
+
 
     }
 
@@ -44,7 +49,7 @@ ProductService productService;
     public void beforeMethod() {
         DBTemplate dbTemplate = DBTemplate.getInstance();
         mockProductsDB();
-        mockUserDB();
+        mockUsersDB();
 
         UserDao userDao = new UserDaoImpl(dbTemplate);
         userService = new UserServiceImpl(userDao);
@@ -63,15 +68,15 @@ ProductService productService;
 
         ShoppingCart shoppingCart1 = new ShoppingCart();
         shoppingCart1.setUser(userService.get(1));
-        shoppingCart1.getProducts().addAll(Arrays.asList(products.get(1), products.get(3), products.get(5)));
+        shoppingCart1.getProducts().add(products.get(1));
 
         ShoppingCart shoppingCart2 = new ShoppingCart();
-        shoppingCart2.setUser(userService.get(4));
-        shoppingCart2.getProducts().add(products.get(4));
+        shoppingCart2.setUser(userService.get(2));
+        shoppingCart2.getProducts().add(products.get(2));
 
         ShoppingCart shoppingCart3 = new ShoppingCart();
-        shoppingCart3.setUser(userService.get(2));
-        shoppingCart3.getProducts().add(products.get(2));
+        shoppingCart3.setUser(userService.get(3));
+        shoppingCart3.getProducts().add(products.get(3));
 
 
         dbTemplate.getShoppingCarts().addAll(Arrays.asList(shoppingCart1, shoppingCart2, shoppingCart3));
@@ -89,7 +94,7 @@ ProductService productService;
 
     }
 
-    private void mockUserDB() {
+    private void mockUsersDB() {
         DBTemplate dbTemplate = DBTemplate.getInstance();
         dbTemplate.getUsers().clear();
         User user1 = new User(1, "Bob", "Bbbb", "1210345u");
