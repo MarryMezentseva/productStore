@@ -60,7 +60,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         if (!shoppingCart.isPresent()){
             throw new RuntimeException("User is null.");
         }else {
-            shoppingCart.get().getProducts().removeIf(p -> p.getId() == productId);
+            if (!shoppingCart.get().getProducts().removeIf(p -> p.getId() == productId)){
+                throw new RuntimeException("Can't find product by ID=" + productId);
+            }
         }
     }
 

@@ -18,32 +18,47 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
+
 import static org.testng.Assert.*;
 
 public class ShoppingCartServiceImplTest {
 
-ShoppingCartService shoppingCartService;
-UserService userService;
-ProductService productService;
+    ShoppingCartService shoppingCartService;
+    UserService userService;
+    ProductService productService;
 
     @Test
     public void testAddProduct() {
-        User user = userService.get(4);
+        User user = userService.get(3);
         Product product = productService.get(3);
-
         shoppingCartService.addProduct(user, product);
         ShoppingCart shoppingCart = shoppingCartService.getByUser(user);
         int result = shoppingCart.getProducts().size();
-        assertEquals(result, 1);
-
+        assertEquals(result, 4);
     }
 
     @Test
     public void testRemoveProduct() {
+        User user = userService.get(2);
+        shoppingCartService.removeProduct(user, 3);
+        ShoppingCart shoppingCart = shoppingCartService.getByUser(user);
+        int result = shoppingCart.getProducts().size();
+        assertEquals(result, 0);
     }
 
     @Test
     public void testRemoveAllProducts() {
+        User user = userService.get(3);
+        shoppingCartService.removeAllProducts(user);
+        ShoppingCart shoppingCart = shoppingCartService.getByUser(user);
+        int result = shoppingCart.getProducts().size();
+        assertEquals(result, 0);
+    }
+
+    @Test(expectedExceptions = RuntimeException.class)
+    public void negativeTestRemoveProductNonexistentId() {
+        User user = userService.get(2);
+        shoppingCartService.removeProduct(user, 8);
     }
 
     @BeforeMethod
@@ -62,6 +77,7 @@ ProductService productService;
         ShoppingCartDAO shoppingCartDAO = new ShoppingCartDAOImpl(dbTemplate);
         shoppingCartService = new ShoppingCartServiceImpl(shoppingCartDAO);
     }
+
     private void mockShoppingCartDB() {
         DBTemplate dbTemplate = DBTemplate.getInstance();
         dbTemplate.getShoppingCarts().clear();
