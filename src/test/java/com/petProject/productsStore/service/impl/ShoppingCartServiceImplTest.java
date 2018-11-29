@@ -55,6 +55,12 @@ public class ShoppingCartServiceImplTest {
         assertEquals(result, 0);
     }
 
+    @Test
+    public void testGetByUser(){
+        ShoppingCart shoppingCart = shoppingCartService.getByUser(userService.get(1));
+        assertNotNull(shoppingCart);
+    }
+
     @Test(expectedExceptions = RuntimeException.class)
     public void negativeTestRemoveProductNonexistentId() {
         User user = userService.get(2);
