@@ -1,6 +1,4 @@
-package com.petProject.productsStore.productDAO;
-
-import com.petProject.productsStore.entity.User;
+package com.petProject.productsStore.dao;
 
 import java.util.List;
 

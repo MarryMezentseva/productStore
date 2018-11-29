@@ -3,12 +3,12 @@ package com.petProject.productsStore.service.impl;
 import com.petProject.productsStore.entity.Product;
 import com.petProject.productsStore.entity.ShoppingCart;
 import com.petProject.productsStore.entity.User;
-import com.petProject.productsStore.productDAO.ProductDAO;
-import com.petProject.productsStore.productDAO.ShoppingCartDAO;
-import com.petProject.productsStore.productDAO.UserDao;
-import com.petProject.productsStore.productDAO.impl.ProductDAOImpl;
-import com.petProject.productsStore.productDAO.impl.ShoppingCartDAOImpl;
-import com.petProject.productsStore.productDAO.impl.UserDaoImpl;
+import com.petProject.productsStore.dao.ProductDAO;
+import com.petProject.productsStore.dao.ShoppingCartDAO;
+import com.petProject.productsStore.dao.UserDao;
+import com.petProject.productsStore.dao.impl.ProductDAOImpl;
+import com.petProject.productsStore.dao.impl.ShoppingCartDAOImpl;
+import com.petProject.productsStore.dao.impl.UserDaoImpl;
 import com.petProject.productsStore.service.ProductService;
 import com.petProject.productsStore.service.ShoppingCartService;
 import com.petProject.productsStore.service.UserService;
@@ -18,8 +18,6 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
-
-import static org.testng.Assert.*;
 
 public class ShoppingCartServiceImplTest {
 

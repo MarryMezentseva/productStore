@@ -1,13 +1,11 @@
-package com.petProject.productsStore.productDAO.impl;
+package com.petProject.productsStore.dao.impl;
 
 import com.petProject.productsStore.entity.Product;
-import com.petProject.productsStore.productDAO.ProductDAO;
+import com.petProject.productsStore.dao.ProductDAO;
 import com.petProject.productsStore.utils.DBTemplate;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class ProductDAOImpl implements ProductDAO {
 

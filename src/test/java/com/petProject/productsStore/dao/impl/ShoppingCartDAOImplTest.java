@@ -1,17 +1,15 @@
-package com.petProject.productsStore.productDAO.impl;
+package com.petProject.productsStore.dao.impl;
 
 import com.petProject.productsStore.entity.Product;
 import com.petProject.productsStore.entity.ShoppingCart;
 import com.petProject.productsStore.entity.User;
-import com.petProject.productsStore.productDAO.ProductDAO;
-import com.petProject.productsStore.productDAO.ShoppingCartDAO;
-import com.petProject.productsStore.productDAO.UserDao;
+import com.petProject.productsStore.dao.ProductDAO;
+import com.petProject.productsStore.dao.ShoppingCartDAO;
+import com.petProject.productsStore.dao.UserDao;
 import com.petProject.productsStore.utils.DBTemplate;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

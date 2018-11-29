@@ -1,4 +1,4 @@
-package com.petProject.productsStore.productDAO;
+package com.petProject.productsStore.dao;
 
 import com.petProject.productsStore.entity.User;
 

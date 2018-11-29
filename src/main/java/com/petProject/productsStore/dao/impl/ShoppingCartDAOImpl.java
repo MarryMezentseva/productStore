@@ -1,14 +1,12 @@
-package com.petProject.productsStore.productDAO.impl;
+package com.petProject.productsStore.dao.impl;
 
-import com.petProject.productsStore.entity.Product;
 import com.petProject.productsStore.entity.ShoppingCart;
 import com.petProject.productsStore.entity.User;
-import com.petProject.productsStore.productDAO.ShoppingCartDAO;
+import com.petProject.productsStore.dao.ShoppingCartDAO;
 import com.petProject.productsStore.utils.DBTemplate;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
+
 public class ShoppingCartDAOImpl implements ShoppingCartDAO {
 
     protected DBTemplate dbTemplate;
