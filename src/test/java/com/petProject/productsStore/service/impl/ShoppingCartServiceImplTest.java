@@ -18,6 +18,7 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import static org.testng.Assert.*;
 
 public class ShoppingCartServiceImplTest {
 
@@ -31,7 +32,9 @@ ProductService productService;
         Product product = productService.get(3);
 
         shoppingCartService.addProduct(user, product);
-
+        ShoppingCart shoppingCart = shoppingCartService.getByUser(user);
+        int result = shoppingCart.getProducts().size();
+        assertEquals(result, 1);
 
     }
 
@@ -74,7 +77,7 @@ ProductService productService;
 
         ShoppingCart shoppingCart3 = new ShoppingCart();
         shoppingCart3.setUser(userService.get(3));
-        shoppingCart3.getProducts().add(products.get(3));
+        shoppingCart3.getProducts().addAll(Arrays.asList(products.get(0), products.get(1), products.get(2)));
 
 
         dbTemplate.getShoppingCarts().addAll(Arrays.asList(shoppingCart1, shoppingCart2, shoppingCart3));
