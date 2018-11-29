@@ -79,4 +79,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
             shoppingCart.get().getProducts().clear();
         }
     }
+
+    @Override
+    public ShoppingCart getByUser(User user) {
+        return shoppingCartDAO.getByUserId(user.getId());
+    }
 }
