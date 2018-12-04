@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="HTML based ProductApp tests results">
-    <test name="testngTest">
+    <test name="User registration and products adding scenario">
         <classes>
             <class name="com.petProject.productsStore.integrationTest.UserProductAddingScenarioIT" />
         </classes>

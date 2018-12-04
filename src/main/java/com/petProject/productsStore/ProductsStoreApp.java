@@ -22,6 +22,7 @@ public class ProductsStoreApp {
         ProductsStoreApp app = new ProductsStoreApp();
         app.init();
         app.runApp();
+        app.terminate();
     }
 
     public void init() {

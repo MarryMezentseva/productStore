@@ -5,6 +5,7 @@ import com.petProject.productsStore.entity.Product;
 import com.petProject.productsStore.entity.ShoppingCart;
 import com.petProject.productsStore.entity.User;
 import com.petProject.productsStore.utils.DBTemplate;
+import org.hamcrest.Matchers;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -14,15 +15,10 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static org.hamcrest.CoreMatchers.hasItems;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.*;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsNot.not;
+
 
 public class UserProductAddingScenarioIT {
 
@@ -44,7 +40,7 @@ public class UserProductAddingScenarioIT {
         thread.start();
     }
 
-    @Test(priority = 10)
+    @Test (priority = 10)
     public void addNewUser(){
         User user = new User();
         user.setName("Jhon");
@@ -54,7 +50,7 @@ public class UserProductAddingScenarioIT {
         assertNotNull(storeApp.getUserService().get(persistedUser.getId()), "New User registration fail.");
     }
 
-    @Test(priority = 20, dependsOnMethods = "addNewUser")
+    @Test(priority = 20, dependsOnMethods = "addNewUser") //(priority = 20, dependsOnMethods = "addNewUser")
     public void add_2_ProductsToShoppingCart(){
         Product product1 = storeApp.getProductService().get(100);
         Product product2 = storeApp.getProductService().get(200);
@@ -65,12 +61,13 @@ public class UserProductAddingScenarioIT {
         List<Product> products = shoppingCart.getProducts();
 
         assertThat(products, containsInAnyOrder(
-                product1,
-                product2
+                product2,
+                product1
         ));
+
     }
 
-    @Test(priority = 30, dependsOnMethods = {"addNewUser", "add_2_ProductsToShoppingCart"})
+    @Test (priority = 30, dependsOnMethods = {"addNewUser", "add_2_ProductsToShoppingCart"})
     public void add_10_ProductsToShoppingCart(){
         Product product1 = storeApp.getProductService().get(300);
         Product product2 = storeApp.getProductService().get(400);
@@ -121,11 +118,11 @@ public class UserProductAddingScenarioIT {
         ShoppingCart shoppingCart = storeApp.getShoppingCartService().getByUser(persistedUser);
         List<Product> products = shoppingCart.getProducts();
 
-        assertThat(products,not(hasItem(product)));
+        assertThat(products, not(hasItem(product)));
     }
 
-    @Test(priority = 50, dependsOnMethods = {"addNewUser", "add_2_ProductsToShoppingCart", "add_10_ProductsToShoppingCart", "delete_1_ProductFromShoppingCart"})
-    public void delete_5_ProductFromShoppingCart(){
+    @Test (priority = 50, dependsOnMethods = {"addNewUser", "add_2_ProductsToShoppingCart", "add_10_ProductsToShoppingCart"})
+    public void delete_10_ProductFromShoppingCart(){
         Product product1 = storeApp.getProductService().get(200);
         Product product2 = storeApp.getProductService().get(300);
         Product product3 = storeApp.getProductService().get(400);
