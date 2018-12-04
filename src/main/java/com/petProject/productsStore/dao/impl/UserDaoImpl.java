@@ -17,7 +17,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void create(User user) {
+    public User create(User user) {
         if (user == null){
             throw new RuntimeException("Can't add null.");
         }
@@ -26,6 +26,7 @@ public class UserDaoImpl implements UserDao {
                 .max(Comparator.naturalOrder()).get();
         user.setId(id + 1);
         users.add(user);
+        return user;
     }
 
     @Override

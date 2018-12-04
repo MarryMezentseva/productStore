@@ -5,7 +5,7 @@ import com.petProject.productsStore.entity.Product;
 import java.util.List;
 
 public interface Service <T> {
-    void create(T t);
+    T create(T t);
     void update(T t);
     void delete(int id);
     T get(int id);

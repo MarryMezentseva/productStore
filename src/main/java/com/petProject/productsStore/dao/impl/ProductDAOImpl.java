@@ -18,7 +18,7 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     @Override
-    public void create(Product product) {
+    public Product create(Product product) {
         if (product == null){
             throw new RuntimeException("Cant add null.");
         }
@@ -27,6 +27,7 @@ public class ProductDAOImpl implements ProductDAO {
                 .max(Comparator.naturalOrder()).get();
         product.setId(id + 1);
         productList.add(product);
+        return product;
     }
 
     @Override
