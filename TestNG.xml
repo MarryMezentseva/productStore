@@ -3,6 +3,7 @@
     <test name="User registration and products adding scenario">
         <classes>
             <class name="com.petProject.productsStore.integrationTest.UserProductAddingScenarioIT" />
+            <class name="com.petProject.productsStore.integrationTest.UserUpdatingScenarioIT" />
         </classes>
     </test>
 </suite>

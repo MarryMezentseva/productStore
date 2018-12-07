@@ -13,11 +13,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
-
-import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.*;
-import static org.hamcrest.MatcherAssert.assertThat;
-
 
 public class UserUpdatingScenarioIT {
     private ProductsStoreApp storeApp;
@@ -49,16 +45,22 @@ public class UserUpdatingScenarioIT {
     @Test(priority = 20, dependsOnMethods = "getUser")
     public void updateUserName() {
         persistedUser.setName("new Name");
+        storeApp.getUserService().update(persistedUser);
+        assertEquals(storeApp.getUserService().get(750).getName(), persistedUser.getName());
     }
 
-    @Test//(priority = 30, dependsOnMethods = "getUser")
+    @Test(priority = 20, dependsOnMethods = "getUser")
     public void updateUserLastName() {
         persistedUser.setLastName("new lastName");
+        storeApp.getUserService().update(persistedUser);
+        assertEquals(storeApp.getUserService().get(750).getLastName(), persistedUser.getLastName());
     }
 
-    @Test//(priority = 40, dependsOnMethods = "getUser")
+    @Test(priority = 20, dependsOnMethods = "getUser")
     public void updateUserPassword() {
-
+        persistedUser.setPassword("new Password");
+        storeApp.getUserService().update(persistedUser);
+        assertEquals(storeApp.getUserService().get(750).getPassword(), persistedUser.getPassword());
     }
 
     @AfterClass
