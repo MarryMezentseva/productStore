@@ -5,7 +5,6 @@ import com.petProject.productsStore.entity.Product;
 import com.petProject.productsStore.entity.ShoppingCart;
 import com.petProject.productsStore.entity.User;
 import com.petProject.productsStore.utils.DBTemplate;
-import org.hamcrest.Matchers;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -50,7 +49,7 @@ public class UserProductAddingScenarioIT {
         assertNotNull(storeApp.getUserService().get(persistedUser.getId()), "New User registration fail.");
     }
 
-    @Test(priority = 20, dependsOnMethods = "addNewUser") //(priority = 20, dependsOnMethods = "addNewUser")
+    @Test(priority = 20, dependsOnMethods = "addNewUser")
     public void add_2_ProductsToShoppingCart(){
         Product product1 = storeApp.getProductService().get(100);
         Product product2 = storeApp.getProductService().get(200);
