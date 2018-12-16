@@ -2,17 +2,18 @@ package com.petProject.productsStore.integrationTest;
 
 import com.petProject.productsStore.ProductsStoreApp;
 import com.petProject.productsStore.entity.Product;
+import com.petProject.productsStore.entity.ShoppingCart;
 import com.petProject.productsStore.entity.User;
 import com.petProject.productsStore.utils.DBTemplate;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertNotNull;
 
 public class ProductGettingScenarioIT {
@@ -40,9 +41,21 @@ public class ProductGettingScenarioIT {
         persistedUser = storeApp.getUserService().get(600);
         assertNotNull(persistedUser);
     }
-    @Test(priority = 20, dependsOnMethods = "getUser")
-    public void getProductByName(){
 
+    @Test(priority = 20, dependsOnMethods = "getUser")
+    public void getProductsByName() {
+        final String PRODUCT_NAME = "prodName600";
+        List<Product> productList = storeApp.getProductService().getProductsByName(PRODUCT_NAME);
+        for (Product product : productList) {
+            storeApp.getShoppingCartService().addProduct(persistedUser, product);
+            //assertEquals(product.getName(), PRODUCT_NAME);
+        }
+        ShoppingCart shoppingCart = storeApp.getShoppingCartService().getByUser(persistedUser);
+        List<Product> allUserProducts = shoppingCart.getProducts();
+
+        Product[] productsArr = new Product[allUserProducts.size()];
+
+        assertThat(allUserProducts, hasItems(allUserProducts.toArray(productsArr)));
     }
 
     @Test
@@ -71,6 +84,10 @@ public class ProductGettingScenarioIT {
                     ThreadLocalRandom.current().nextDouble(min, max + 1));
             products.add(product);
         }
+        Product product3001 = new Product(3001,"prodName600","600 too", 10.50);
+        Product product3002 = new Product(3002,"prodName600","600 too", 120.10);
+        Product product3003 = new Product(3003,"prodName600","600 too", 120.10);
+        products.addAll(Arrays.asList(product3001, product3002, product3003));
         return products;
     }
 
