@@ -48,7 +48,6 @@ public class ProductGettingScenarioIT {
         List<Product> productList = storeApp.getProductService().getProductsByName(PRODUCT_NAME);
         for (Product product : productList) {
             storeApp.getShoppingCartService().addProduct(persistedUser, product);
-            //assertEquals(product.getName(), PRODUCT_NAME);
         }
         ShoppingCart shoppingCart = storeApp.getShoppingCartService().getByUser(persistedUser);
         List<Product> allUserProducts = shoppingCart.getProducts();
@@ -58,10 +57,20 @@ public class ProductGettingScenarioIT {
         assertThat(allUserProducts, hasItems(allUserProducts.toArray(productsArr)));
     }
 
-    @Test
-    public void getProductByPriceRange(){
-
+    @Test(priority = 20, dependsOnMethods = "getUser")
+    public void getProductByPriceRange() {
+        final double START_PRICE = 50.50;
+        final double END_PRICE = 400.50;
+        List<Product> products = storeApp.getProductService().getByPriceRange(START_PRICE, END_PRICE);
+        for (Product product : products) {
+            storeApp.getShoppingCartService().addProduct(persistedUser, product);
+        }
+        ShoppingCart shoppingCart = storeApp.getShoppingCartService().getByUser(persistedUser);
+        List<Product> allUsersProducts = shoppingCart.getProducts();
+        Product[] arrayProducts = new Product[allUsersProducts.size()];
+        assertThat(allUsersProducts, hasItems(allUsersProducts.toArray(arrayProducts)));
     }
+
     @AfterClass
     public void terminate(){
         storeApp.terminate();
